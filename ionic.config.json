@@ -1,0 +1,7 @@
+{
+  "name": "aci app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
