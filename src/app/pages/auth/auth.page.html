@@ -1,0 +1,45 @@
+<app-header title="Iniciar Sesión"></app-header>
+
+<ion-content>
+
+  <div class="d-flex-center">
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+
+      <app-logo></app-logo>
+
+      <!-- Input para el correo -->
+      <ion-item class="custom-input" lines="none">
+        <ion-icon slot="start" name="mail" color="success"></ion-icon>
+        <ion-input formControlName="correo" color="success" type="email" labelPlacement="floating" label="Correo" clear-input="true"
+          helperText="Ingresa un correo válido" errorText="Correo inválido" [counter]="true" maxlength="25">
+        </ion-input>
+      </ion-item>
+
+      <!-- Input para la contraseña -->
+      <ion-item class="custom-input" lines="none">
+        <ion-icon slot="start" name="lock-closed" color="success"></ion-icon>
+        <ion-input formControlName="contraseña" [type]="hide ? 'password' : 'text'" color="success" labelPlacement="floating" label="Contraseña" clear-input="true"
+          helperText="Ingresa mínimo 6 caracteres" errorText="Contraseña inválida" [counter]="true" maxlength="20">
+        </ion-input>
+        <ion-button fill="clear" shape="round" color="success" (click)="togglePasswordVisibility()">
+          <ion-icon slot="icon-only" [name]="hide ? 'eye' : 'eye-off'" size="large" color="success"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+
+      <p routerLink="forgot-password" class="ion-text-end">¿Olvidaste la contraseña?</p>
+
+      <ion-button class="submit" type="submit" expand="block" mode="ios" fill="solid" shape="round" color="success" [disabled]="form.invalid">
+        Ingresar
+      </ion-button>
+
+      <ion-button routerLink="sign-up" class="ion-margin-top" expand="block" mode="ios" fill="solid" shape="round" color="success">
+        Registrarse
+      </ion-button>
+
+    </form>
+
+  </div>
+
+</ion-content>

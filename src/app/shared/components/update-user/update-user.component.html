@@ -1,0 +1,56 @@
+<app-hmodal [isModal]="true" [title]="users ? 'Modificar usuario' : 'Agregar usuario'"></app-hmodal>
+
+<ion-content>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="ion-padding ion-text-center" (keypress.enter)="submit()">
+
+    <ion-avatar *ngIf="form.value.img">
+      <img [src]="form.value.img" />
+    </ion-avatar>
+
+    <ion-icon class="img-icon" *ngIf="!form.value.img" name="images"></ion-icon><br>
+
+    <ion-button (click)="takeImage()" color="success" mode="ios" fill="solid" size="small" shape="round">
+      Tomar / Subir imagen
+    </ion-button>
+
+    <ion-item lines="none" class="custom-input">
+      <ion-input formControlName="nombre" label="Nombre de usuario" color="success" type="text"
+        labelPlacement="floating" autocomplete="name" errorText="Nombre inválido" counter maxlength="35">
+      </ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="custom-input">
+      <ion-input formControlName="correo" label="Correo" color="success" type="text" labelPlacement="floating"
+        errorText="Correo inválido" counter maxlength="35"></ion-input>
+    </ion-item>
+
+    <ion-item class="custom-input" lines="none">
+      <ion-select formControlName="tipo" color="success" label="Tipo" labelPlacement="floating" interface="popover">
+        <ion-select-option selected value="alumno">Alumno</ion-select-option>
+        <ion-select-option value="maestro">Maestro</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Input para la contraseña -->
+    <ion-item class="custom-input" lines="none">
+      <ion-input formControlName="contraseña" color="success" type="password"
+        labelPlacement="floating" label="Contraseña" clear-input="true" helperText="Ingresa mínimo 6 caracteres"
+        errorText="Contraseña inválida" [counter]="true" maxlength="20">
+      </ion-input>
+    </ion-item>
+
+    <ion-item class="custom-input" lines="none">
+      <ion-input formControlName="fecha" color="success" type="date" labelPlacement="floating" label="Fecha"
+        clear-input="true" helperText="Fecha de registro" errorText="Fecha inválida">
+      </ion-input>
+    </ion-item>
+
+    <ion-button class="submit" type="submit" expand="block" mode="ios" fill="solid" shape="round" color="success"
+      [disabled]="form.invalid">
+      {{users ? 'Modificar' : 'Agregar'}}
+    </ion-button>
+
+  </form>
+
+</ion-content>

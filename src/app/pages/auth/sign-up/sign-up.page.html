@@ -1,0 +1,64 @@
+<app-header backButton="/auth" title="Registrarse"></app-header>
+
+<ion-content>
+
+  <div class="d-flex-center">
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form" (keypress.enter)="submit()">
+
+      <app-logo></app-logo>
+
+      <!-- Input para el nombre -->
+      <ion-item class="custom-input" lines="none">
+        <ion-icon slot="start" name="text" color="success"></ion-icon>
+        <ion-input formControlName="nombre" color="success" type="text" labelPlacement="floating" label="Nombre"
+          clear-input="true" helperText="Ingresa tu nombre" errorText="Nombre inválido" [counter]="true" maxlength="35">
+        </ion-input>
+      </ion-item>
+
+      <!-- Input para el correo -->
+      <ion-item class="custom-input" lines="none">
+        <ion-icon slot="start" name="mail" color="success"></ion-icon>
+        <ion-input formControlName="correo" color="success" type="email" labelPlacement="floating" label="Correo"
+          clear-input="true" helperText="Ingresa tu correo" errorText="Correo inválido" [counter]="true" maxlength="35">
+        </ion-input>
+      </ion-item>
+
+      <!-- Input para el tipo -->
+      <ion-item class="custom-input" lines="none">
+        <ion-icon slot="start" name="person" color="success"></ion-icon>
+        <ion-select formControlName="tipo" color="success" label="Tipo" labelPlacement="floating" interface="popover">
+          <ion-select-option selected value="alumno">Alumno</ion-select-option>
+          <ion-select-option value="maestro">Maestro</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Input para la contraseña -->
+      <ion-item class="custom-input" lines="none">
+        <ion-icon slot="start" name="lock-closed" color="success"></ion-icon>
+        <ion-input formControlName="contraseña" [type]="hide ? 'password' : 'text'" color="success"
+          labelPlacement="floating" label="Contraseña" clear-input="true" helperText="Ingresa mínimo 6 caracteres"
+          errorText="Contraseña inválida" [counter]="true" maxlength="20">
+        </ion-input>
+        <ion-button fill="clear" shape="round" (click)="togglePasswordVisibility()">
+          <ion-icon slot="icon-only" [name]="hide ? 'eye' : 'eye-off'" size="large" color="success"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item class="custom-input" lines="none" [disabled]="true">
+        <ion-icon slot="start" name="today" color="success"></ion-icon>
+        <ion-input formControlName="fecha" color="success" type="date" labelPlacement="floating" label="Fecha"
+          clear-input="true" helperText="Fecha de registro" errorText="Fecha inválida">
+        </ion-input>
+      </ion-item>
+
+      <ion-button class="submit" type="submit" expand="block" mode="ios" fill="solid" shape="round" color="success"
+        [disabled]="form.invalid">
+        Registrar
+      </ion-button>
+
+    </form>
+
+  </div>
+
+</ion-content>

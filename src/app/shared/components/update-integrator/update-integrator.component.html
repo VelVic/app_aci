@@ -1,0 +1,64 @@
+<app-hmodal [isModal]="true" [title]="integrator ? 'Modificar integradora' : 'Agregar integradora'"></app-hmodal>
+
+<ion-content>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="ion-padding ion-text-center" (keypress.enter)="submit()">
+
+    <ion-avatar *ngIf="form.value.img">
+      <img [src]="form.value.img" />
+    </ion-avatar>
+
+    <ion-icon class="img-icon" *ngIf="!form.value.img" name="images"></ion-icon><br>
+
+    <ion-button (click)="takeImage()" color="success" mode="ios" fill="solid" size="small" shape="round">
+      Tomar / Subir imagen
+    </ion-button>
+
+    <ion-item lines="none" class="custom-input">
+      <ion-input formControlName="nombre" label="Nombre de integradora" color="success" type="text"
+        labelPlacement="floating" autocomplete="name" errorText="Ingresa el nombre de integradora" counter
+        maxlength="50">
+      </ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="custom-input">
+      <ion-textarea formControlName="descripcion" label="Descripción" color="success" type="text"
+        labelPlacement="floating" errorText="Ingresa una breve descripción" counter maxlength="250"
+        autoGrow></ion-textarea>
+    </ion-item>
+
+    <ion-item lines="none" class="custom-input">
+      <ion-input formControlName="categoria" label="Carrera o Categoria" color="success" type="text"
+        labelPlacement="floating" autocomplete="organization" errorText="Ingresa una carrera o categoria" counter
+        maxlength="50" autoGrow>
+      </ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="custom-input">
+      <ion-input formControlName="fechaCreacion" label="Fecha de creación" color="success" type="date"
+        labelPlacement="floating" errorText="Selecciona una fecha" counter maxlength="10">
+      </ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="custom-input">
+      <ion-input formControlName="estado" label="Estado de la integradora" color="success" type="text"
+        labelPlacement="floating" errorText="Indica en que estado se encuentra: progreso, finalizado, cancelado" counter
+        maxlength="10">
+      </ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="custom-input">
+      <ion-textarea formControlName="responsables" label="Responsables (autores)" color="success" type="text"
+        labelPlacement="floating" errorText="Ingresa los responsables de la integradora" counter maxlength="60"
+        autoGrow>
+      </ion-textarea>
+    </ion-item>
+
+    <ion-button class="submit" type="submit" expand="block" mode="ios" fill="solid" shape="round" color="success"
+      [disabled]="form.invalid">
+      {{integrator ? 'Modificar' : 'Agregar'}}
+    </ion-button>
+
+  </form>
+
+</ion-content>

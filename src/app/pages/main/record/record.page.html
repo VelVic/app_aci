@@ -1,0 +1,49 @@
+<app-header [showMenu]="true" title="Historial de Acciones"></app-header>
+<ion-content>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list lines="full" *ngIf="!loading">
+        <ion-item-sliding class="product-item" *ngFor="let re of record">
+            <ion-item detail button> <!-- (click)="viewIntegrator(inte)" -->
+                <ion-label>
+                    <div class="name">{{ re.accion }}</div>
+                    <div class="data">
+                        {{ re.detalles }}
+                    </div>
+                    <div class="data">
+                        ID Usuario: {{ re.usuarioId }}
+                    </div>
+                    <div class="data">
+                        Fecha: {{ re.fecha }}
+                    </div>
+                </ion-label>
+            </ion-item>
+
+        </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngIf="loading">
+        <ion-item-sliding class="product-item" *ngFor="let dummy of [1,1,1,1,1,1,1]">
+            <ion-item>
+                <ion-avatar slot="start">
+                    <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+                </ion-avatar>
+                <ion-label>
+                    <div>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                        <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                    </div>
+                </ion-label>
+            </ion-item>
+        </ion-item-sliding>
+    </ion-list>
+
+    <div class="empty" *ngIf="!loading && !record.length">
+        <ion-icon name="business"></ion-icon>
+        <h3>No hay historial aún</h3>
+    </div>
+
+</ion-content>

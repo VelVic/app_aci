@@ -1,0 +1,42 @@
+<ion-menu contentId="menu-content" menuId="menu-content" side="start" type="overlay">
+  <app-header title="Menú"></app-header>
+
+  <ion-content class="ion-text-center">
+
+    <ion-avatar>
+      <img class="i-profile" *ngIf="user()?.img" [src]="user()?.img" alt="Foto de perfil">
+    <ion-icon class="empty-icon" *ngIf="!user()?.img" name="person-circle"></ion-icon>
+    </ion-avatar>
+
+    <h3>{{ user()?.nombre }}</h3>
+    <h4 *ngIf="user()?.tipo == 'admin'" class="name-user">Administrador</h4>
+    <h4 *ngIf="user()?.tipo == 'alumno'" class="name-user">Alumno</h4> 
+    <h4 *ngIf="user()?.tipo == 'maestro'" class="name-user">Maestro</h4> 
+
+    <ion-menu-toggle autoHide="false" *ngFor="let a of admin"><!-- *ngIf="user()?.tipo === 'admin'" -->
+      <ion-item *ngIf="user()?.tipo!='alumno'" lines="full" class="menu-item" [ngClass]="{'active': currentPath === a.url}" [routerLink]="a.url"
+        routerDirection="root" detail>
+        <ion-icon slot="start" [name]="a.icon"></ion-icon>
+        <ion-label>{{ a.title }}</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+
+    <ion-menu-toggle autoHide="false" *ngFor="let p of pages">
+      <ion-item lines="full" class="menu-item" [ngClass]="{'active': currentPath === p.url}" [routerLink]="p.url"
+        routerDirection="root" detail>
+        <ion-icon slot="start" [name]="p.icon"></ion-icon>
+        <ion-label>{{ p.title }}</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+
+  </ion-content>
+
+  <ion-footer class="ion-no-border menu-footer"> 
+    <ion-item (click)="signOut()" lines="none">
+      <ion-icon slot="start" color="danger" name="log-out"></ion-icon>
+      <ion-label>Cerrar cuenta</ion-label>
+    </ion-item>
+  </ion-footer>
+</ion-menu>
+
+<ion-router-outlet id="menu-content" main></ion-router-outlet>

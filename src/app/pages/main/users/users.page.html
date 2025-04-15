@@ -1,0 +1,66 @@
+<app-header [showMenu]="true" title="Usuarios"></app-header>
+<ion-content>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  
+    <ng-container *ngIf="!loading">
+    <ion-list lines="full" *ngIf="!loading">
+      <ion-item-sliding class="product-item" *ngFor="let us of users">
+        <ion-item detail button > <!-- (click)="viewIntegrator(inte)" -->
+          <ion-avatar slot="start">
+            <img [src]="us.img">
+          </ion-avatar>
+          <ion-label>
+            <div class="name">{{ us.nombre }}</div>
+            <div class="data">Correo: {{ us.correo }}</div>
+            <div class="data">Rol: {{ us.tipo }}</div>
+
+          </ion-label>
+        </ion-item>
+  
+        <ion-item-options>
+          <ion-item-option color="success" *ngIf="user()?.tipo === 'admin'" (click)="addUpdateUser(us)">
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="primary">
+            <ion-icon slot="icon-only" name="document-text"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger" *ngIf="user()?.tipo === 'admin'" (click)="confirmDeleteUser(us)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+  
+      </ion-item-sliding>
+    </ion-list>
+  
+    <ion-list *ngIf="loading">
+      <ion-item-sliding class="product-item" *ngFor="let dummy of [1,1,1,1,1,1,1]">
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+          </ion-avatar>
+          <ion-label>
+            <div>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+              <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+  
+    <div class="empty" *ngIf="!loading && !users.length">
+      <ion-icon name="person"></ion-icon>
+      <h3>No hay usuarios disponibles</h3>
+    </div>
+</ng-container>
+  
+    <ion-fab *ngIf="user()?.tipo === 'admin'" vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="addUpdateUser()" color="success">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  
+  </ion-content>
